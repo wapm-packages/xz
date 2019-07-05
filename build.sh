@@ -12,6 +12,7 @@ echo "Configure"
 # Configure and compile LLVM bitcode
 emconfigure ./configure \
   --disable-assembler \
+  --disable-dependency-tracking \
   --disable-doc \
   --disable-scripts \
   || exit $?
