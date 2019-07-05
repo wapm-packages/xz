@@ -11,6 +11,7 @@ echo "Configure"
 
 # Configure and compile LLVM bitcode
 emconfigure ./configure \
+  CFLAGS='-static' \
   --disable-assembler \
   --disable-dependency-tracking \
   --disable-doc \
@@ -23,17 +24,17 @@ emmake make -j8 || exit $?
 # Generate `.wasm` file
 echo "Link"
 
-mv src/lzmainfo/.libs/lzmainfo src/lzmainfo/.libs/lzmainfo.bc
-emcc src/lzmainfo/.libs/lzmainfo.bc -o ../lzmainfo.wasm -s ERROR_ON_UNDEFINED_SYMBOLS=0
+mv src/lzmainfo/lzmainfo src/lzmainfo/lzmainfo.bc
+emcc src/lzmainfo/lzmainfo.bc -o ../lzmainfo.wasm
 
-mv src/xz/.libs/xz src/xz/.libs/xz.bc
-emcc src/xz/.libs/xz.bc -o ../xz.wasm -s ERROR_ON_UNDEFINED_SYMBOLS=0
+mv src/xz/xz src/xz/xz.bc
+emcc src/xz/xz.bc -o ../xz.wasm
 
-mv src/xzdec/.libs/xzdec src/xzdec/.libs/xzdec.bc
-emcc src/xzdec/.libs/xzdec.bc -o ../xzdec.wasm -s ERROR_ON_UNDEFINED_SYMBOLS=0
+mv src/xzdec/xzdec src/xzdec/xzdec.bc
+emcc src/xzdec/xzdec.bc -o ../xzdec.wasm
 
-mv src/xzdec/.libs/lzmadec src/xzdec/.libs/lzmadec.bc
-emcc src/xzdec/.libs/lzmadec.bc -o ../lzmadec.wasm -s ERROR_ON_UNDEFINED_SYMBOLS=0
+mv src/xzdec/lzmadec src/xzdec/lzmadec.bc
+emcc src/xzdec/lzmadec.bc -o ../lzmadec.wasm
 
 echo "Clean"
 cd ..
